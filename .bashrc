@@ -423,9 +423,10 @@ export -n PS1
 #######################################################################
 #                           Vagrant, virt*                            #
 #######################################################################
-export VAGRANT_VAGRANTFILE=Vagrantfile.local
-export VAGRANT_DEFAULT_PROVIDER=libvirt
-export VAGRANT_HOME=/run/media/$USER/DATA/.vagrant.d
+# *** Moved to .bashrc.local ***
+# export VAGRANT_VAGRANTFILE=Vagrantfile.local
+# export VAGRANT_DEFAULT_PROVIDER=libvirt
+# export VAGRANT_HOME=/run/media/$USER/DATA/.vagrant.d
 
 # set extglob back to how we found it
 [[ $oldextglob == *off ]] && shopt -u extglob
