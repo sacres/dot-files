@@ -58,9 +58,9 @@ set background=dark
 
 " colorscheme
 colorscheme lucius
-LuciusBlack
 
 " lucius _tweaks_
+LuciusBlackHighContrast
 
 
 " vim-airline settings
@@ -120,6 +120,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Syntastic python
+let g:syntastic_python_checkers = ['pyflakes']
 
 " Undo dir
 set undodir=~/.vim/undodir
