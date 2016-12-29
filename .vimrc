@@ -80,13 +80,6 @@ set autoindent
 set ignorecase
 set smartcase
 
-" Twitter .. there goes the neighborhood
-" let twitvim_enable_python3 = 1
-" let twitvim_browser_cmd = 'firefox'
-" let twitvim_enable_tcl = 1
-" let twitvim_enable_ruby = 1
-" let twitvim_enable_perl = 1
-
 " Keybindings for UltiSnips, all of these are ctrl + key
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-f>"
