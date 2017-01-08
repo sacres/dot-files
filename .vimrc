@@ -80,6 +80,9 @@ set autoindent
 set ignorecase
 set smartcase
 
+" Turn of search hilite after search
+nnoremap <CR> :nohlsearch<CR><CR>
+
 " Keybindings for UltiSnips, all of these are ctrl + key
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-f>"
@@ -105,6 +108,8 @@ au BufNewFile,BufRead *.pp setlocal softtabstop=2
 au BufNewFile,BufRead *.pp setlocal shiftwidth=2
 au BufNewFile,BufRead *.pp setlocal noexpandtab
 
+" Python [TBRdone]
+
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -116,6 +121,15 @@ let g:syntastic_check_on_wq = 0
 
 " Syntastic python
 let g:syntastic_python_checkers = ['flake8']
+
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" YCM Tweaks
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 
 " Undo dir
 set undodir=~/.vim/undodir
