@@ -1,0 +1,70 @@
+#######################################################################
+#                              Git Stuff                              #
+#######################################################################
+if [ -f .gitconfig ]; then
+    export GIT_COMMITTER_NAME="$(git config --get user.name)"
+    export GIT_COMMITTER_EMAIL="$( git config --get user.email)"
+    export GIT_AUTHOR_NAME="$(git config --get user.name)"
+    export GIT_AUTHOR_EMAIL="$(git config --get user.email)"
+fi
+
+#######################################################################
+#                           Vagrant, virt*                            #
+#######################################################################
+# Assumes DATA mount exists. This needs some luv; as does the libvirt vars.
+# export VAGRANT_VAGRANTFILE=Vagrantfile.local
+# export VAGRANT_DEFAULT_PROVIDER=libvirt
+export VAGRANT_HOME=/run/media/$USER/DATA/.vagrant.d
+
+#######################################################################
+#                               Python                                #
+#######################################################################
+# virtualenv mgmt via: https://github.com/yyuu/pyenv
+if [ -d ~/.pyenv ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
+fi
+
+#######################################################################
+#           GH Token (Handled elsewhere) w/ enc.		      #
+#######################################################################
+
+#######################################################################
+#                             Android SDK                             #
+#######################################################################
+if [ -d /opt/Android ]; then
+    export PATH=$PATH:/opt/Android/Sdk/platform-tools
+fi
+
+#######################################################################
+#                            Atlassian SDK                            #
+#######################################################################
+if [ -d /opt/atlassian-plugin-sdk ]; then
+    PATH=$PATH:$(find /opt/atlassian-plugin-sdk -type d -iname 'bin' -printf ":%p")
+fi
+
+#######################################################################
+#                             Travis CLI                              #
+#######################################################################
+if [ -d ~/.travis ]; then
+    source ~/.travis/travis.sh
+fi
+
+#######################################################################
+#                                 GPG                                 #
+#######################################################################
+alias gpg=gpg2
+
+export GPG_TTY="$(tty)"
+export GPG_AGENT_INFO
+
+#######################################################################
+#                                RUBY                                 #
+#######################################################################
+if [ -d ~/.rbenv ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
