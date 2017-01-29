@@ -31,6 +31,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'voxpupuli/vim-puppet'
@@ -44,6 +45,10 @@ Plugin 'twitvim/twitvim.git'
 Plugin 'cohlin/vim-colorschemes'
 Plugin 'rakr/vim-one'
 Plugin 'jonathanfilip/vim-lucius'
+Plugin 'vimperator/vimperator.vim'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+
 call vundle#end()
 
 " filetype plugin on
@@ -58,15 +63,21 @@ set background=dark
 
 " colorscheme
 colorscheme lucius
-LuciusBlack
 
 " lucius _tweaks_
+LuciusBlackHighContrast
 
 
 " vim-airline settings
 set laststatus=2
 let g:airline_theme = "lucius"
 let g:airline_powerline_fonts = 1
+
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Paste Hotkey
 set pastetoggle=<F2>
@@ -80,12 +91,8 @@ set autoindent
 set ignorecase
 set smartcase
 
-" Twitter .. there goes the neighborhood
-" let twitvim_enable_python3 = 1
-" let twitvim_browser_cmd = 'firefox'
-" let twitvim_enable_tcl = 1
-" let twitvim_enable_ruby = 1
-" let twitvim_enable_perl = 1
+" Turn of search hilite after search
+nnoremap <CR> :nohlsearch<CR><CR>
 
 " Keybindings for UltiSnips, all of these are ctrl + key
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -112,6 +119,24 @@ au BufNewFile,BufRead *.pp setlocal softtabstop=2
 au BufNewFile,BufRead *.pp setlocal shiftwidth=2
 au BufNewFile,BufRead *.pp setlocal noexpandtab
 
+" Vim Commentary
+autocmd FileType *vimperatorrc setlocal commentstring="\ %s
+
+" Pandoc/Markdown Madness
+let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+
+" Python [TBRdone]
+
+" Testing nerd commenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -120,6 +145,31 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+
+" Syntastic python
+let g:syntastic_python_checkers = ['flake8']
+
+" Syntastic js
+let g:syntastic_javascript_checkers = ['jshint']
+
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" YCM Tweaks
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" YCM Ignore nothing ..
+let g:ycm_filetype_blacklist = {}
+
+" GPG
+let g:GPGUseAgent = 1
+let g:GPGPrimeAgent = 1
 
 " Undo dir
 set undodir=~/.vim/undodir
