@@ -1,7 +1,19 @@
 # ORIGINALLY FROM: *Last CVS Id: other.bashrc,v 1.14 2003/06/11 13:41:26 boyd Exp *
-#############
-#  content  #
-#############
+# Borg bashrc :: Resistance.sh is futile 8P
+# Copyright © 2017 Steven Acres
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 ######################################################################
 # COMMENTS & DOCUMENTATION {{{1
@@ -146,8 +158,8 @@ PATH=$PATH:/usr/bin/X11:/usr/tcb/bin
 # MacOSX entries
 PATH=/sw/bin:/sw/sbin:/Developer/Tools:$PATH
 # My entries
-PATH=$PATH:~/bin:~/bin/admin:/usr/local/bin:/usr/kerberos/sbin:/opt/google:/opt/adt-bundle-linux-x86_64/sdk/platform-tools:/opt/Adobe/Reader9/bin:/opt/TeamSpeak3-Client-linux_amd64/:/opt/vagrant:/usr/local/array_vpn:.local/bin:$(find /opt/atlassian-plugin-sdk -type d -iname 'bin' -printf ":%p")
-# Android SDK
+PATH=$PATH:~/bin:~/bin/admin:/usr/local/bin:/usr/kerberos/sbin:/opt/google:/opt/adt-bundle-linux-x86_64/sdk/platform-tools:/opt/Adobe/Reader9/bin:/opt/TeamSpeak3-Client-linux_amd64/:/opt/vagrant:/usr/local/array_vpn:.local/bin
+# Android SDK & Atlassian path munge as below moved to bashrc.local (To be added to gh once crypto is finalized)
 #PATH=$PATH:$(find /opt/Android \( -iname 'bin' -printf ":%p" -o -iname 'adb' -printf ":%p\n" \))
 # Late Solaris entries - definitely want these at the end
 PATH=$PATH:/usr/ucb
@@ -165,8 +177,8 @@ MANPATH=$MANPATH:/usr/cluster/man:/usr/cluster/dtk/man:/usr/sfw/man
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-if [ -f `which powerline-daemon` ]; then
- powerline-daemon -q
+if type powerline-daemon 2> /dev/null ; then
+  powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
   . /usr/share/powerline/bash/powerline.sh
@@ -611,12 +623,13 @@ function log2syslog
 trap log2syslog DEBUG
 fi
 
+# Editing system files
+export SUDO_EDITOR=vim
+
 #######################################################################
 #                                Ruby                                 #
 #######################################################################
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# Moved rbenv => .bashrc.local (w/ conditional)
 
 ######################################################################
 # Make the last call on the local settings file {{{1
@@ -635,4 +648,5 @@ unset _debugging
 #######################################################################
 #                               Python                                #
 #######################################################################
-# source ~/venv/bin/activate
+# source ~/venv/bin/activate (Swapped out for pyenv:
+# https://github.com/yyuu/pyenv ) & moved to .bashrc.local
