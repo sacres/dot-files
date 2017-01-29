@@ -2,6 +2,10 @@
 vim, bash and other madness :smile:
 
 WIP: Moving bits from private repo(s) => here.
+
+License
+-------
+
 Copyright © 2017 Steven Acres
 
 This program is free software; you can redistribute it and/or modify
