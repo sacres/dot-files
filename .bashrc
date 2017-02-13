@@ -516,8 +516,17 @@ fi
 # file. I know, how lazy is this?
 
 alias rebash='. ~/.bashrc'
+
+# Create a shorty-style alias for date with format of yyyy-month-day
+
 alias dt='date +%F'
-alias Packer='/usr/bin/packer'
+
+# Packer image creation command ... not Green Bay nor the other ones..
+
+if [[ -f /usr/bin/packer ]] ; then
+   alias Packer='/usr/bin/packer'
+fi
+
 unalias ls 2>/dev/null
 ######################################################################
 # Functions {{{1
