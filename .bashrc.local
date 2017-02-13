@@ -1,14 +1,4 @@
 #######################################################################
-#                              Git Stuff                              #
-#######################################################################
-if [ -f .gitconfig ]; then
-    export GIT_COMMITTER_NAME="$(git config --get user.name)"
-    export GIT_COMMITTER_EMAIL="$( git config --get user.email)"
-    export GIT_AUTHOR_NAME="$(git config --get user.name)"
-    export GIT_AUTHOR_EMAIL="$(git config --get user.email)"
-fi
-
-#######################################################################
 #                           Vagrant, virt*                            #
 #######################################################################
 # Assumes DATA mount exists. This needs some luv; as does the libvirt vars.
@@ -26,6 +16,8 @@ if [ -d ~/.pyenv ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
     export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
+    # Python Encoding
+    export PYTHONIOENCODING=utf_8
 fi
 
 #######################################################################
@@ -57,9 +49,7 @@ fi
 #                                 GPG                                 #
 #######################################################################
 alias gpg=gpg2
-
 export GPG_TTY="$(tty)"
-export GPG_AGENT_INFO
 
 #######################################################################
 #                                RUBY                                 #
@@ -72,10 +62,37 @@ fi
 #######################################################################
 #                              Powerline                              #
 #######################################################################
-
 if [[ "$(type -p powerline-daemon)" ]]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
   . /usr/share/powerline/bash/powerline.sh
+fi
+
+#######################################################################
+#                                 Go                                  #
+#######################################################################
+if [ -f /usr/bin/go ]; then
+  export GOPATH="$HOME/go-work"
+  export PATH=$PATH:$GOPATH/bin
+fi
+
+
+#######################################################################
+#                              Git Stuff                              #
+#######################################################################
+if [ -f .gitconfig ]; then
+    export GIT_COMMITTER_NAME="$(getent passwd $USER | cut -d ':' -f 5)"
+    export GIT_COMMITTER_EMAIL="$( git config --get user.email)"
+    export GIT_AUTHOR_NAME="$(getent passwd $USER | cut -d ':' -f 5)"
+    export GIT_AUTHOR_EMAIL="$(git config --get user.email)"
+    export GITHUB_USER="$(git config --get user.name)"
+fi
+
+if [[ "$(type -p hub)" ]]; then
+    . "$HOME/bin/hub.bash_completion.sh"
+    eval "$(hub alias -s)"
+    if [ ! -f "$HOME"/.config/hub ]; then
+      gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/hub.gpg > "$HOME"/.config/hub
+    fi
 fi
