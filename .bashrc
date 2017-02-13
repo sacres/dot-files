@@ -114,7 +114,7 @@
 # Make the first call on the local settings file {{{1
 ######################################################################
 
-[ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local pre
+# [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local pre
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -163,8 +163,6 @@ PATH=$PATH:~/bin:~/bin/admin:/usr/local/bin:/usr/kerberos/sbin:/opt/google:/opt/
 #PATH=$PATH:$(find /opt/Android \( -iname 'bin' -printf ":%p" -o -iname 'adb' -printf ":%p\n" \))
 # Late Solaris entries - definitely want these at the end
 PATH=$PATH:/usr/ucb
-#export PYTHONPATH=$HOME/.local/lib/python3.5/site-packages
-export PYTHONIOENCODING=utf_8
 MANPATH=/sw/share/man:/usr/share/man:/usr/dt/share/man
 MANPATH=$MANPATH:/usr/local/man:/usr/openwin/man
 MANPATH=$MANPATH:/usr/X11R6/man/:/usr/perl5/man
@@ -516,8 +514,17 @@ fi
 # file. I know, how lazy is this?
 
 alias rebash='. ~/.bashrc'
+
+# Create a shorty-style alias for date with format of yyyy-month-day
+
 alias dt='date +%F'
-alias Packer='/usr/bin/packer'
+
+# Packer image creation command ... not Green Bay nor the other ones..
+
+if [[ -f /usr/bin/packer ]] ; then
+   alias Packer='/usr/bin/packer'
+fi
+
 unalias ls 2>/dev/null
 ######################################################################
 # Functions {{{1
