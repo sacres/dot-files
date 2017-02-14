@@ -7,20 +7,6 @@
 export VAGRANT_HOME=/run/media/$USER/DATA/.vagrant.d
 
 #######################################################################
-#                               Python                                #
-#######################################################################
-# virtualenv mgmt via: https://github.com/yyuu/pyenv
-if [ -d ~/.pyenv ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
-    # Python Encoding
-    export PYTHONIOENCODING=utf_8
-fi
-
-#######################################################################
 #           GH Token (Handled elsewhere) w/ enc.		      #
 #######################################################################
 
@@ -60,16 +46,6 @@ if [ -d ~/.rbenv ]; then
 fi
 
 #######################################################################
-#                              Powerline                              #
-#######################################################################
-if [[ "$(type -p powerline-daemon)" ]]; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/share/powerline/bash/powerline.sh
-fi
-
-#######################################################################
 #                                 Go                                  #
 #######################################################################
 if [ -f /usr/bin/go ]; then
@@ -95,4 +71,29 @@ if [[ "$(type -p hub)" ]]; then
     if [ ! -f "$HOME"/.config/hub ]; then
       gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/hub.gpg > "$HOME"/.config/hub
     fi
+fi
+
+
+#######################################################################
+#                              Powerline                              #
+#######################################################################
+if [[ "$(type -p powerline-daemon)" ]]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bash/powerline.sh
+fi
+
+#######################################################################
+#                               Python                                #
+#######################################################################
+# virtualenv mgmt via: https://github.com/yyuu/pyenv
+if [ -d ~/.pyenv ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
+    # Python Encoding
+    export PYTHONIOENCODING=utf_8
 fi
