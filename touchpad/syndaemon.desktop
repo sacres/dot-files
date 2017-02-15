@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Touchpad Tweaks (Synaptics)
+Comment=Control the touchpad (or mouse)
+Type=Application
+Exec=sh -c "$HOME/bin/tpad"
+Icon=roxterm
+Terminal=false
+#X-GNOME-Autostart-enabled=true
