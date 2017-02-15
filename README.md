@@ -3,7 +3,7 @@ vim, bash and other madness :smile:
 
 WIP: Moving bits from private repo(s) => here.
 
-License
+```License
 -------
 
 Copyright © 2017 Steven Acres
