@@ -113,7 +113,8 @@
 ######################################################################
 # Make the first call on the local settings file {{{1
 ######################################################################
-
+# Disabled as unused (also it broke/mangled path munging when path vars set
+# due to calling twice it seems)
 # [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local pre
 
 # Source global definitions
@@ -159,7 +160,8 @@ PATH=$PATH:/usr/bin/X11:/usr/tcb/bin
 PATH=/sw/bin:/sw/sbin:/Developer/Tools:$PATH
 # My entries
 PATH=$PATH:~/bin:~/bin/admin:/usr/local/bin:/usr/kerberos/sbin:/opt/google:/opt/adt-bundle-linux-x86_64/sdk/platform-tools:/opt/Adobe/Reader9/bin:/opt/TeamSpeak3-Client-linux_amd64/:/opt/vagrant:/usr/local/array_vpn:.local/bin
-# Android SDK & Atlassian path munge as below moved to bashrc.local (To be added to gh once crypto is finalized)
+# Android SDK & Atlassian path munge as below moved to bashrc.local (which is to be added to GH once crypto is finalized)
+# ADDED .bashrc.local to GH Feb 14, 2017 **TODO**: extricate comments like above and throughout to CHANGELOG/HISTORY files**
 #PATH=$PATH:$(find /opt/Android \( -iname 'bin' -printf ":%p" -o -iname 'adb' -printf ":%p\n" \))
 # Late Solaris entries - definitely want these at the end
 PATH=$PATH:/usr/ucb
@@ -549,8 +551,8 @@ unalias ls 2>/dev/null
 # branch that it's not executing, so we have to put the entire function
 # definition in a big string so we can eval it. I don't know why I bother!
 
-if [[ ( ${BASH_VERSINFO[0]} = "2"  || ${BASH_VERSINFO[0]} > "2" )
-   && ( ${BASH_VERSINFO[1]} = "04" || ${BASH_VERSINFO[1]} > "04" ) ]]; then
+if [[ ( ${BASH_VERSINFO[0]} = "2"  || ${BASH_VERSINFO[0]} -gt "2" )
+   && ( ${BASH_VERSINFO[1]} = "04" || ${BASH_VERSINFO[1]} -gt "04" ) ]]; then
    eval ' function ruler {
         local start end col firstline secondline lastline
         declare -i start end col

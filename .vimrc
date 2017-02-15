@@ -174,3 +174,7 @@ let g:GPGPrimeAgent = 1
 " Undo dir
 set undodir=~/.vim/undodir
 set undofile
+
+" Mouse Trap
+set mouse=
+set ttymouse=
