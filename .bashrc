@@ -239,67 +239,6 @@ fi
 
 unset PROG OPTPROGS LOCALPROGS
 
-# Clean up path-like variables {{{2
-# Here we clean up the PATH and similar variables by removing non-existant
-# dirs and duplicates.
-#
-# This whole thing is complicated by the fact that we want to keep the
-# existing path components in order, so we can't just use sort -u
-#
-# We do this by declaring a function that cleans a variable. This function
-# is currently left declared for future use. TODO: Should we unset this?
-
-# pathclean: Clean up path-like variables {{{3
-# arguments: name-of-var-to-clean
-#
-# Note that this function's parameter is the NAME of the variable to clean
-# up, not the contents of the variable. The variable is changed in-place.
-# This is the bash equivalent to pass-by-reference!
-
-function pathclean() {
-    # Variable Declarations
-    local -a newpathcomps     # Array of new path components
-    local -i alreadyseen      # Have we already seen this component?
-    local component           # Current component we're looking at
-    local -i i                # loop var
-    local thevar=$1           # The NAME of the variable we're cleaning
-
-    # Clean up the PATH
-    # Expunge double /s and make : into a space. Unfortunatly, this breaks
-    # on path entries with a space in them, as happens in the cygwin
-    # environment with the fabulous "Program Files" directory, so we have
-    # to kludge them into | and then back again...
-    for component in $(echo ${!thevar} |
-                        sed -e 's/ /|/g' -e 's/:/ /g' -e 's#//#/#g')
-    do
-        if [[ -d ${component//|/ } ]]; then
-            # The directory exists, lets check we haven't already seen it
-            alreadyseen=0
-            i=0
-            while (( $i < ${#newpathcomps[*]} )); do
-                if [[ ${newpathcomps[i]} == $component ]]; then
-                    alreadyseen=1
-                    break
-                fi
-                (( i = i + 1 ))
-            done
-            if (( ! alreadyseen )); then
-                newpathcomps[i]=$component
-            fi
-        fi
-    done
-    # I'm just not game to wrap this line!
-    eval "$thevar=\"$( echo ${newpathcomps[*]} | sed -e's/ /:/g' -e 's/|/ /g')\""
-}
-
-# Perform the cleaning {{{3
-
-pathclean PATH
-pathclean MANPATH
-pathclean LD_LIBRARY_PATH
-
-export PATH MANPATH #LD_LIBRARY_PATH
-
 ######################################################################
 # Terminal setup {{{1
 ######################################################################

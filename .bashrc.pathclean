@@ -1,0 +1,41 @@
+function pathclean() {
+  # Variable Declarations
+  local -a newpathcomps     # Array of new path components
+  local -i alreadyseen      # Have we already seen this component?
+  local component           # Current component we're looking at
+  local -i i                # loop var
+  local thevar=$1           # The NAME of the variable we're cleaning
+
+  # Clean up the PATH
+  # Expunge double /s and make : into a space. Unfortunatly, this breaks
+  # on path entries with a space in them, as happens in the cygwin
+  # environment with the fabulous "Program Files" directory, so we have
+  # to kludge them into | and then back again...
+  for component in $(echo "${!thevar}" |
+		      sed -e 's/ /|/g' -e 's/:/ /g' -e 's#//#/#g')
+  do
+      if [[ -d ${component//|/ } ]]; then
+	  # The directory exists, lets check we haven't already seen it
+	  alreadyseen=0
+	  i=0
+	  while (( "$i" < ${#newpathcomps[*]} )); do
+	      if [[ ${newpathcomps[i]} == "$component" ]]; then
+		  alreadyseen=1
+		  break
+	      fi
+	      (( i = i + 1 ))
+	  done
+	  if (( ! alreadyseen )); then
+	      newpathcomps[i]=$component
+	  fi
+      fi
+  done
+  # I'm just not game to wrap this line!
+  eval "$thevar=\"$(echo "${newpathcomps[*]}" | sed -e's/ /:/g' -e 's/|/ /g')\""
+}
+
+pathclean PATH
+pathclean MANPATH
+# pathclean LD_LIBRARY_PATH
+
+export PATH MANPATH #LD_LIBRARY_PATH

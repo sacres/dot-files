@@ -14,21 +14,21 @@ export VAGRANT_HOME=/run/media/$USER/DATA/.vagrant.d
 #                             Android SDK                             #
 #######################################################################
 if [ -d /opt/Android ]; then
-    export PATH=$PATH:/opt/Android/Sdk/platform-tools
+  export PATH=$PATH:/opt/Android/Sdk/platform-tools
 fi
 
 #######################################################################
 #                            Atlassian SDK                            #
 #######################################################################
 if [ -d /opt/atlassian-plugin-sdk ]; then
-    PATH=$PATH:$(find /opt/atlassian-plugin-sdk -type d -iname 'bin' -printf ":%p")
+  PATH=$PATH:$(find /opt/atlassian-plugin-sdk -type d -iname 'bin' -printf ":%p")
 fi
 
 #######################################################################
 #                             Travis CLI                              #
 #######################################################################
 if [ -d ~/.travis ]; then
-    source ~/.travis/travis.sh
+  source ~/.travis/travis.sh
 fi
 
 #######################################################################
@@ -41,8 +41,8 @@ export GPG_TTY="$(tty)"
 #                                RUBY                                 #
 #######################################################################
 if [ -d ~/.rbenv ]; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
 fi
 
 #######################################################################
@@ -53,26 +53,40 @@ if [ -f /usr/bin/go ]; then
   export PATH=$PATH:$GOPATH/bin
 fi
 
-
 #######################################################################
 #                              Git Stuff                              #
 #######################################################################
 if [ -f .gitconfig ]; then
-    export GIT_COMMITTER_NAME="$(getent passwd $USER | cut -d ':' -f 5)"
-    export GIT_COMMITTER_EMAIL="$( git config --get user.email)"
-    export GIT_AUTHOR_NAME="$(getent passwd $USER | cut -d ':' -f 5)"
-    export GIT_AUTHOR_EMAIL="$(git config --get user.email)"
-    export GITHUB_USER="$(git config --get user.name)"
+  export GIT_COMMITTER_NAME="$(getent passwd $USER | cut -d ':' -f 5)"
+  export GIT_COMMITTER_EMAIL="$( git config --get user.email)"
+  export GIT_AUTHOR_NAME="$(getent passwd $USER | cut -d ':' -f 5)"
+  export GIT_AUTHOR_EMAIL="$(git config --get user.email)"
+  export GITHUB_USER="$(git config --get user.name)"
 fi
 
 if [[ "$(type -p hub)" ]]; then
-    . "$HOME/bin/hub.bash_completion.sh"
-    eval "$(hub alias -s)"
-    if [ ! -f "$HOME"/.config/hub ]; then
-      gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/hub.gpg > "$HOME"/.config/hub
-    fi
+  . "$HOME/bin/hub.bash_completion.sh"
+  eval "$(hub alias -s)"
+  if [ ! -f "$HOME"/.config/hub ]; then
+    gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/hub.gpg > "$HOME"/.config/hub
+  fi
 fi
 
+#######################################################################
+#                           Token Affection                           #
+#######################################################################
+GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN
+function with_github () {
+  GITHUB_TOKEN=$(gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/gh_token.gpg)
+}
+
+#######################################################################
+#                              Node o_0                               #
+#######################################################################
+if [[ "$(type -p node)" ]]; then
+  node_path=$(npm config get prefix)
+  export PATH="$node_path/bin:$PATH"
+fi
 
 #######################################################################
 #                              Powerline                              #
@@ -89,11 +103,18 @@ fi
 #######################################################################
 # virtualenv mgmt via: https://github.com/yyuu/pyenv
 if [ -d ~/.pyenv ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
-    # Python Encoding
-    export PYTHONIOENCODING=utf_8
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
+  # Python Encoding
+  export PYTHONIOENCODING=utf_8
+fi
+
+#######################################################################
+#                     Call in the Cleaner (PATH)                      #
+#######################################################################
+if [ -f "$HOME/.bashrc.pathclean" ]; then
+  . "$HOME/.bashrc.pathclean"
 fi
