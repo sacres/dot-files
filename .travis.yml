@@ -4,9 +4,7 @@ language: bash
 dist: trusty
 sudo: required
 before_install:
-  - echo "deb http://archive.ubuntu.com/ubuntu/ trusty-backports universe" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
-  - sudo apt-get install shellcheck -y
 addons:
   apt:
     sources:
