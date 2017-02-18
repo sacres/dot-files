@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/sacres/dot-files.png?branch=master)](https://travis-ci.org/sacres/dot-files)
 # dot-files
 vim, bash and other madness :smile:
 ----
