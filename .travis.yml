@@ -3,7 +3,8 @@ language: bash
 # Use container-based infrastructure for quicker build start-up
 dist: trusty
 sudo: false
-
+before_install:
+  - sudo apt-get -qq update
 addons:
   apt:
     sources:
@@ -12,7 +13,7 @@ addons:
     - shellcheck
 
 script:
- - bash -c 'shopt -s globstar; shellcheck **/*.bash*'
+ - bash -c 'shopt -s globstar; shellcheck *.bash*'
 
 matrix:
   fast_finish: true
