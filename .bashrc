@@ -1,4 +1,5 @@
-# ORIGINALLY FROM: *Last CVS Id: other.bashrc,v 1.14 2003/06/11 13:41:26 boyd Exp *
+# shellcheck disable=1090,1091,2035,2154,2166
+# ORIGINALLY ASSIMILATED FROM: *Last CVS Id: other.bashrc,v 1.14 2003/06/11 13:41:26 boyd Exp *
 # Borg bashrc :: Resistance.sh is futile 8P
 # Copyright © 2017 Steven Acres
 
@@ -119,7 +120,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-            . /etc/bashrc
+   . /etc/bashrc
 fi
 
 ######################################################################
@@ -131,7 +132,7 @@ fi
 # LOCALPROGS allows programs to be installed in
 # /usr/local/<progname>/{bin,man,sbin,lib} and still be found.  OPTPROGS
 # does the same thing for /opt/<progname> - mostly for Solaris. MYOPTPROGS
-# is the same thing for ~/opt, but I don't understamd why you'd install
+# is the same thing for ~/opt, but I don't understand why you'd install
 # stuff in your own home dir and then not want to run it!
 #
 # Here we add EVERY path we're likely to need, independant of OS. We will
@@ -142,10 +143,10 @@ fi
 # all apps, but if either of the {LOCAL,OPT}PROGS variables is not set it
 # will be automatically filled below with all values from the disk.
 
-#LOCALPROGS=python26 #"vim screen teTeX"
+#LOCALPROGS=
 OPTPROGS="SUNWcluster SUNWmd"
 MYOPTPROGS=""
-
+# The PATH gets cleaned/de-duped from the last call residing in .bashrc.local which s
 # Basic Entries
 PATH=/sbin:/usr/sbin:/usr/bin:/usr/dt/bin:$PATH
 # Solaris entries
@@ -174,21 +175,22 @@ MANPATH=$MANPATH:/usr/cluster/man:/usr/cluster/dtk/man:/usr/sfw/man
 # Localize timezone
 # export TZ="America/Toronto"
 # Set LANG etc.
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+LANG=en_US.UTF-8
+LANGUAGE=en_US.UTF-8
+export LANG LC_ALL LANGUAGE
 # Auto-add paths {{{2
 # /usr/local {{{3
 if [ -d /usr/local ]; then
-    for PROG in ${LOCALPROGS:-$(cd /usr/local; echo *)}
+    for PROG in ${LOCALPROGS:-$(cd /usr/local || return; echo *)}
     do
-        if [ -d /usr/local/$PROG/bin ]; then
+        if [ -d "/usr/local/$PROG/bin" ]; then
             PATH=/usr/local/$PROG/bin:$PATH
         fi
-        if [ -d /usr/local/$PROG/sbin ]; then
+        if [ -d "/usr/local/$PROG/sbin" ]; then
             PATH=/usr/local/$PROG/sbin:$PATH
         fi
-        if [ -d /usr/local/$PROG/man ]; then
+        if [ -d "/usr/local/$PROG/man" ]; then
             MANPATH=/usr/local/$PROG/man:$MANPATH
         fi
 #        if [ -d /usr/local/$PROG/lib ]; then
@@ -199,15 +201,15 @@ fi
 
 # /opt {{{3
 if [ -d /opt ]; then
-    for PROG in ${OPTPROGS:-$(cd /opt; echo *)}
+    for PROG in ${OPTPROGS:-$(cd /opt || return; echo *)}
     do
-        if [ -d /opt/$PROG/bin ]; then
+        if [ -d "/opt/$PROG/bin" ]; then
             PATH=$PATH:/opt/$PROG/bin
         fi
-        if [ -d /opt/$PROG/sbin ]; then
+        if [ -d "/opt/$PROG/sbin" ]; then
             PATH=$PATH:/opt/$PROG/sbin
         fi
-        if [ -d /opt/$PROG/man ]; then
+        if [ -d "/opt/$PROG/man" ]; then
             MANPATH=$MANPATH:/opt/$PROG/man
         fi
 #        if [ -d /opt/$PROG/lib ]; then
@@ -219,16 +221,16 @@ fi
 # $HOME/opt {{{3
 # Don't do this if our home directory is /. This won't affect the
 # resulting PATH but it will make the loop below faster
-if [ -d $HOME/opt -a $HOME != "/" ]; then
-    for PROG in ${MYOPTPROGS:-$(cd $HOME/opt; echo *)}
+if [ -d "$HOME/opt" -a "$HOME" != "/" ]; then
+    for PROG in ${MYOPTPROGS:-$(cd "$HOME/opt" || return; echo *)}
     do
-        if [ -d $HOME/opt/$PROG/bin ]; then
-            PATH=$HOME/opt/$PROG/bin:$PATH
+        if [ -d "$HOME/opt/$PROG/bin" ]; then
+            PATH="$HOME/opt/$PROG/bin":$PATH
         fi
-        if [ -d $HOME/opt/$PROG/sbin ]; then
+        if [ -d "$HOME/opt/$PROG/sbin" ]; then
             PATH=$HOME/opt/$PROG/sbin:$PATH
         fi
-        if [ -d $HOME/opt/$PROG/man ]; then
+        if [ -d "$HOME/opt/$PROG/man" ]; then
             MANPATH=$HOME/opt/$PROG/man:$MANPATH
         fi
 #        if [ -d $HOME/opt/$PROG/lib ]; then
@@ -247,7 +249,7 @@ unset PROG OPTPROGS LOCALPROGS
 # TODO: I think there's a tset in /usr/ucb
 if [[ "$_shell_is_interactive" == 1 && $OSTYPE != solaris* ]]; then
     if [[ $(type -p tset) ]]; then
-        eval $(SHELL=/bin/sh tset -r -s)
+        eval "$(SHELL=/bin/sh tset -r -s)"
     fi
 fi
 
@@ -322,7 +324,8 @@ shopt -s histappend                      # append to history, don't overwrite it
 # Declare some variables to work with
 declare basicprompt='\h:\W\$'
 # We need extglob turned on, so save the current value
-declare oldextglob=$( shopt extglob )
+oldextglob=$( shopt extglob )
+declare oldextglob
 shopt -s extglob
 declare settitle setcoloron setcoloroff
 # set up complicated prompt stuff based on terminal type
@@ -330,7 +333,7 @@ case $TERM in
     eterm|gnome-term*|dtterm*|*xterm*|screen*|linux)
         # These use the basic ANSI color sequences.
         setcoloroff="\[\033[0m\]"
-        if (( ! $UID )); then
+        if (( ! "$UID" )); then
             # we are root... make the prompt red
             setcoloron="\[\033[1;31m\]"
         else
@@ -394,7 +397,7 @@ if (( _running_X )); then
         # IS a second Escape key.
         if [[ $OSTYPE == solaris* ]]; then
             # if it's not already done
-            if [ -n "$(xmodmap -pk | grep Help)" ]; then
+            if xmodmap -pk | grep -q Help; then
                 (( _debugging )) && echo "Remapping Help key to Escape!"
                 xmodmap -e "keysym Help = Escape" > /dev/null 2>&1
             fi
@@ -434,11 +437,12 @@ if [[ $(type -p vim) ]]; then
     else
         alias vi=vim
     fi
-    export EDITOR=$(type -p vim)
-    export VISUAL=$(type -p vim)
+    EDITOR=$(type -p vim)
+    VISUAL=$(type -p vim)
+    export EDITOR VISUAL
 else
-    export EDITOR=$(type -p vi)
-    export VISUAL=$(type -p vi)
+    EDITOR=$(type -p vi)
+    VISUAL=$(type -p vi)
 fi
 
 # If I have GNU ls then use color! {{{2
@@ -536,12 +540,12 @@ if [[ $OSTYPE == solaris* ]]; then
     function ps {
         if [ -n "$1" ]; then
             if [[ $1 == -* ]]; then
-                /usr/bin/ps $@
+                /usr/bin/ps "$@"
             else
-                /usr/ucb/ps $@
+                /usr/ucb/ps "$@"
             fi
         else
-            /usr/bin/ps $@
+            /usr/bin/ps "$@"
         fi
     }
 
@@ -552,7 +556,7 @@ fi # end solaris function
 ######
 # sudo trapping ( we're not always the only admin ;P )
 ######
-if [ 'id -u' == 0 ] ; then
+if [[ "$(id -u)" = 0 ]] ; then
 export HISTFILE=/root/.bash_history-$SUDO_USER
 export HISTTIMEFORMAT="%F %T "
 
@@ -578,7 +582,7 @@ export SUDO_EDITOR=vim
 # ** Stoked with GIT env, email, etc. and other _local_ settings **
 ######################################################################
 
-[ -e $HOME/.bashrc.local ] && . $HOME/.bashrc.local post
+[ -e "$HOME/.bashrc.local" ] && . "$HOME"/.bashrc.local
 
 ######################################################################
 # Clean up {{{1
