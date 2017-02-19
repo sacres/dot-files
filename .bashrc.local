@@ -78,11 +78,11 @@ fi
 #######################################################################
 #                           Token Affection                           #
 #######################################################################
-GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN
 function with_github () {
-  GITHUB_TOKEN=$(gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/gh_token.gpg)
+  gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/gh_token.gpg
 }
-
+GITHUB_ACCESS_TOKEN=$(with_github)
+GITHUB_TOKEN=$(with_github)
 #######################################################################
 #                              Node o_0                               #
 #######################################################################
