@@ -78,11 +78,17 @@ fi
 #######################################################################
 #                           Token Affection                           #
 #######################################################################
-GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN
 function with_github () {
-  GITHUB_TOKEN=$(gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/gh_token.gpg)
+  if [[ "$(type -p pass)" ]]; then
+    /usr/bin/pass github/token
+  fi
 }
 
+if [[ "$(with_github)" ]]; then
+  GITHUB_TOKEN=$(with_github)
+  GITHUB_ACCESS_TOKEN=$(with_github)
+  export GITHUB_TOKEN GITHUB_ACCESS_TOKEN
+fi
 #######################################################################
 #                              Node o_0                               #
 #######################################################################
