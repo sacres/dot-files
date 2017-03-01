@@ -1,0 +1,482 @@
+" Vimperator
+" Steven Acres
+" ----------
+
+" ui
+
+colorscheme default
+
+set toolbars=nonavigation,tabs,addons
+set maxitems=10
+set status=input,ssl,location,bookmark
+set showstatuslinks=1
+set animations
+set titlestring="Vim FooFox"
+
+" Set _my_ leader
+let mapleader='\'
+
+" Our *look*
+set gui=none,tabs,addons
+
+" Disable alt-key menu-toggle
+set! ui.key.menuAccessKeyFocuses=false
+
+" autocomplete with smart Firefox stuff and open tabs
+
+set complete=lt
+
+" tab operation
+noremap <C-h> gT
+noremap <C-l> gt
+noremap <C-p> :tabmove! -1<CR>
+noremap <C-n> :tabmove! +1<CR>
+
+
+" noscript.js
+noremap <Leader>s :noscript toggletemp<CR>
+noremap <Leader>S :noscript toggleperm<CR>
+
+
+
+
+
+" keep messages around for 2 seconds
+
+set messagetimeout=2000
+
+" Better searching
+set ignorecase
+set smartcase
+
+" Turn of search hilite after search
+nnoremap <CR> :nohlsearch<CR><CR>
+
+" DuckDuckGo search
+
+" set defsearch=duckduckgo
+set ds=startpage
+set! defsearch=GoogleFU
+" set suggestengines=duckduckgo
+set! suggestengines=startpage
+set activate=all
+
+" hints
+set hintmatching=contains
+set followhints=1
+set hintinputs=''
+
+" set hintchars=fdasjkl;rcexunim
+
+" focus the content
+
+set focuscontent
+
+" vimperator commands open in new tabs
+
+set newtab=all
+
+" remappings
+
+nnoremap j 3j
+nnoremap k 3k
+nnoremap h 3h
+nnoremap l 3l
+
+nnoremap J gt
+nnoremap K gT
+nnoremap x :tabclose<cr>
+
+nnoremap I <S-Esc>
+
+nnoremap ~ <Nop>
+
+" ignorekeys
+
+ignorekeys clear
+" ignorekeys add drive\\.google\\.com
+" ignorekeys add -except=t,T,o,O,:,g,q inbox\\.google\\.com
+" ignorekeys add -except=t,T,o,O,:,q mail\\.google\\.com
+ignorekeys add -except=: rememberthemilk\\.com
+ignorekeys add youtube\\.com
+
+" Firefox
+" -------
+
+" -----------------------------------------------------------------------
+" -                            about:config                             -
+" -----------------------------------------------------------------------
+set! network.dns.disableIPv6 = true
+set! network.dns.disablePrefetch = true
+set! network.dnsCacheExpiration = 0
+
+" DuckDuckGo
+set! browser.startup.homepage=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
+set! browser.search.selectedEngine=
+set! browser.search.defaultenginename=DuckDuckGo
+set! keyword.URL=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
+set! browser.search.suggest.enabled=false
+set! browser.search.update=false
+
+" full URLs don't scare me
+set! browser.urlbar.trimURLs=false
+
+" new tab page is about:blank
+set! browser.newtab.url=about:blank
+
+" enable pipelining
+set! network.http.pipelining=true
+set! network.http.pipelining.abtest=false
+set! network.http.pipelining.aggressive=true
+set! network.http.pipelining.max-optimistic-requests=3
+set! network.http.pipelining.maxrequests=12
+set! network.http.pipelining.maxsize=300000
+set! network.http.pipelining.read-timeout=60000
+set! network.http.pipelining.reschedule-on-timeout=true
+set! network.http.pipelining.reschedule-timeout=15000
+set! network.http.max-connections=256
+set! network.http.max-connections-per-server=6
+
+" tabs on bottom; slightly more space
+set! browser.tabs.onTop=true
+
+" hide audio playing icon
+set! browser.tabs.showAudioPlayingIcon=false
+
+" no warnings
+set! browser.tabs.warnOnClose=false
+set! browser.tabs.warnOnCloseOtherTabs=false
+set! browser.tabs.warnOnOpen=false
+set! general.warnOnAboutConfig=false
+
+" open tabs to the right of the current
+set! browser.tabs.insertRelatedAfterCurrent=true
+set! browser.tabs.insertRelatedAfterCurrent.override=true
+
+" No close Vim FooFox on last tab close
+set! browser.tabs.closeWindowWithLastTab=false
+
+" what to clear after shutdown?
+set! privacy.clearOnShutdown.cache=false
+set! privacy.clearOnShutdown.cookies=true
+set! privacy.clearOnShutdown.downloads=true
+set! privacy.clearOnShutdown.formdata=true
+set! privacy.clearOnShutdown.history=false
+set! privacy.clearOnShutdown.offlineApps=true
+set! privacy.clearOnShutdown.passwords=true
+set! privacy.clearOnShutdown.sessions=true
+set! privacy.clearOnShutdown.siteSettings=true
+
+" clear cookies on close or in a day
+set! network.cookie.lifetimePolicy=2
+set! network.cookie.lifetime.days=1
+
+" clear last download location when we run this file
+set! browser.download.lastDir=""
+
+" sup NSA
+set! privacy.donottrackheader.enabled=true
+set! privacy.donottrackheader.value=1
+set! privacy.trackingprotection.enabled=true
+
+" private browsing settings
+set! browser.privatebrowsing.autostart=false
+set! browser.privatebrowsing.dont_prompt_on_enter=true
+
+" don't check if we're the default browser
+set! browser.shell.checkDefaultBrowser=false
+
+" don't wait to install extensions
+set! security.dialog_enable_delay=0
+
+" make sure CSP is enabled
+set! security.csp.enable=true
+
+" I've seen the rights thing
+set! browser.rights.3.shown=true
+
+" spellcheck in <inputs> too
+set! layout.spellcheckDefault=2
+
+" view that source
+set! view_source.syntax_highlight=true
+set! view_source.wrap_long_lines=true
+
+" don't animate fullscreen
+set! browser.fullscreen.animate=false
+
+" *not* dark devtools
+set! devtools.theme="light"
+
+" disable cache with devtools open
+set! devtools.cache.disabled=true
+
+" remove stuff from devtools that I don't use
+" set! devtools.performance.enabled=false
+" set! devtools.scratchpad.enabled=false
+" set! devtools.styleeditor.enabled=false
+
+" Security (also see NoScript stuff below)
+" ----------------------------------------
+
+" only cookies from origins
+set! network.cookie.cookieBehavior=1
+
+" what if Google...couldn't see everything I downloaded?
+set! breakpad.reportURL=""
+set! browser.safebrowsing.appRepURL=""
+set! browser.safebrowsing.debug=false
+set! browser.safebrowsing.downloads.enabled=false
+set! browser.safebrowsing.downloads.remote.enabled=false
+set! browser.safebrowsing.enabled=false
+set! browser.safebrowsing.gethashURL=""
+set! browser.safebrowsing.malware.enabled=false
+set! browser.safebrowsing.malware.reportURL=""
+set! browser.safebrowsing.reportErrorURL=""
+set! browser.safebrowsing.reportGenericURL=""
+set! browser.safebrowsing.reportMalwareErrorURL=""
+set! browser.safebrowsing.reportMalwareURL=""
+set! browser.safebrowsing.reportPhishURL=""
+set! browser.safebrowsing.reportURL=""
+set! browser.safebrowsing.updateURL=""
+set! browser.send_pings.require_same_host=true
+set! browser.send_pings=false
+
+" send referrer headers only to the same domain
+" set! network.http.sendRefererHeader=1
+" set! network.http.referer.XOriginPolicy=1
+" set! network.http.referer.spoofSource=true
+" set! network.http.referer.trimmingPolicy=2
+
+" disable some TLS stuff
+set! security.ssl3.dhe_rsa_aes_128_sha=false
+set! security.ssl3.dhe_rsa_aes_256_sha=false
+
+" Greasemonkey
+" ------------
+
+" operate in complete darkness and evil
+set! extensions.greasemonkey.stats.optedin=false
+
+" shut up
+set! extensions.greasemonkey.installDelay=1
+set! extensions.greasemonkey.stats.prompted=true
+
+" Ghostery
+" --------
+
+" we've already gone through the tutorial
+set! extensions.ghostery.tutorial=true
+
+" make Ghostery more ghostlike
+set! extensions.ghostery.showBubble=false
+set! extensions.ghostery.showBugCount=false
+set! extensions.ghostery.showClick2Play=false
+set! extensions.ghostery.showClick2PlayButton=false
+set! extensions.ghostery.toolbarButton=false
+
+" autoupdate bugs and stuff
+set! extensions.ghostery.updateNotification=false
+set! extensions.ghostery.autoUpdateBugs=true
+
+" other blockings
+set! extensions.ghostery.cookieProtect=true
+set! extensions.ghostery.enableCleanup=true
+set! extensions.ghostery.blockFrame=true
+set! extensions.ghostery.blockImage=true
+set! extensions.ghostery.blockObject=true
+set! extensions.ghostery.preventRedirect=false
+set! extensions.ghostery.blockingMode=0
+
+" LastPass
+" --------
+
+" damn these keys are hot
+set! extensions.lastpass.defaultffidHkKeyCode=0
+set! extensions.lastpass.defaultffidHkMods=""
+set! extensions.lastpass.generateHkKeyCode=0
+set! extensions.lastpass.generateHkMods=""
+set! extensions.lastpass.homeHkKeyCode=0
+set! extensions.lastpass.homeHkMods=""
+set! extensions.lastpass.nextHkKeyCode=76
+set! extensions.lastpass.nextHkMods="control shift"
+set! extensions.lastpass.prevHkKeyCode=0
+set! extensions.lastpass.prevHkMods=""
+set! extensions.lastpass.recheckHkKeyCode=0
+set! extensions.lastpass.recheckHkMods=""
+set! extensions.lastpass.saveallHkKeyCode=0
+set! extensions.lastpass.saveallHkMods=""
+set! extensions.lastpass.searchHkKeyCode=0
+set! extensions.lastpass.searchHkMods=""
+set! extensions.lastpass.submitHkKeyCode=0
+set! extensions.lastpass.submitHkMods=""
+
+" what to show and hide?
+set! extensions.lastpass.showChangePasswordNotifications=true
+set! extensions.lastpass.showFillNotifications=false
+set! extensions.lastpass.showFormFillNotifications=true
+set! extensions.lastpass.showHomepageAfterLogin=false
+set! extensions.lastpass.showLoginNotifications=false
+set! extensions.lastpass.showNotifications=false
+set! extensions.lastpass.showSaveSiteNotifications=true
+
+" a better icon
+set! extensions.lastpass.Icon=1
+
+" I will remember you / will you remember me
+set! extensions.lastpass.rememberUsername=true
+set! extensions.lastpass.rememberPassword=false
+
+" speak American
+set! extensions.lastpass.language=en-US
+
+" Pocket
+" ------
+
+" sync everything offline
+set! extensions.isreaditlater.autoOffline=true
+set! extensions.isreaditlater.autoSync=true
+set! extensions.isreaditlater.getOfflineText=true
+set! extensions.isreaditlater.getOfflineWeb=true
+
+" only the hottest keys
+set! extensions.isreaditlater.hotkey_click_mode=""
+set! extensions.isreaditlater.hotkey_gr=""
+set! extensions.isreaditlater.hotkey_open_list=""
+set! extensions.isreaditlater.hotkey_push=""
+set! extensions.isreaditlater.hotkey_sidebar=""
+set! extensions.isreaditlater.hotkey_toggle="alt shift||P"
+
+" misc.
+set! extensions.isreaditlater.autoCloseTab=false
+
+" Tree Style Tab
+" --------------
+
+" tab display
+" set! extensions.treestyletab.twisty.style="sidebar"
+" set! extensions.treestyletab.tabbar.invertTabContents=false
+
+" " no indent
+" set! extensions.treestyletab.maxTreeLevel.vertical=0
+
+" " omnipresent tabs
+" set! extensions.treestyletab.tabbar.autoHide.mode=0
+" set! extensions.treestyletab.tabbar.autoHide.mode.fullscreen=0
+
+" " vertical tabs
+" set! extensions.treestyletab.autoAttach.duplicateTabCommand=0
+" set! extensions.treestyletab.autoAttach.duplicateTabCommand.back=0
+" set! extensions.treestyletab.autoAttach.duplicateTabCommand.forward=0
+" set! extensions.treestyletab.autoAttach.fromCurrent=1
+" set! extensions.treestyletab.autoAttach.goButton=0
+" set! extensions.treestyletab.autoAttach.newTabButton=0
+" set! extensions.treestyletab.autoAttach.newTabCommand=0
+" set! extensions.treestyletab.autoAttach.searchResult=0
+
+" " drop links like it's hot
+" set! extensions.treestyletab.dropLinksOnTab.behavior=2
+
+" " context items
+" set! extensions.treestyletab.show.context-item-bookmarkTabSubtree=false
+" set! extensions.treestyletab.show.context-item-collapseAllSubtree=false
+" set! extensions.treestyletab.show.context-item-expandAllSubtree=false
+" set! extensions.treestyletab.show.context-item-reloadDescendantTabs=false
+" set! extensions.treestyletab.show.context-item-reloadTabSubtree=true
+" set! extensions.treestyletab.show.context-item-removeAllTabsButThisTree=false
+" set! extensions.treestyletab.show.context-item-removeDescendantTabs=true
+" set! extensions.treestyletab.show.context-item-removeTabSubtree=true
+" set! extensions.treestyletab.show.context-item-toggleAutoHide=false
+" set! extensions.treestyletab.show.context-item-toggleFixed=false
+
+" " no collapsing
+" set! extensions.treestyletab.allowSubtreeCollapseExpand.horizontal=false
+" set! extensions.treestyletab.allowSubtreeCollapseExpand.vertical=false
+
+" NoScript and forbidden things
+" -----------------------------
+
+" what is forbidden?
+set! browser.formfill.enable=false
+set! browser.frames.enabled=false
+set! browser.search.geoSpecificDefaults.url=""
+set! browser.search.geoSpecificDefaults=false
+set! browser.search.geoip.url=""
+set! datareporting.healthreport.service.enabled=false
+set! datareporting.healthreport.uploadEnabled=false
+set! loop.enabled=false
+set! media.eme.enabled=false
+set! media.gmp-eme-adobe.enabled=false
+set! network.dns.disablePrefetch=true
+" set! noscript.forbidBookmarklets=true
+" set! noscript.forbidFrames=true
+" set! noscript.forbidIFrames=true
+" set! noscript.forbidSilverlight=true
+" set! noscript.noping=true
+" set! noscript.nosniff=true
+set! plugin.state.googletalkbrowserplugin=0
+set! plugin.state.java=0
+set! plugin.state.npgtpo3dautoplugin=0
+set! plugin.state.o1dbrowserplugin=0
+set! plugin.state.onlivegameclientdetector=0
+set! plugins.click_to_play=true
+set! reader.parse-on-load.enabled=false
+set! security.enable_java=false
+set! social.enabled=false
+set! social.remote-install.enabled=false
+set! social.sidebar.open=false
+set! social.toast-notifications.enabled=false
+set! social.whitelist=""
+set! geo.enabled=false
+set! geo.wifi.url=""
+set! toolkit.telemetry.enabled=false
+
+" what is allowed? javascript, ironically
+" set! noscript.global=false
+" set! noscript.forbidFlash=true
+" set! noscript.forbidFonts=true
+" set! noscipt.forbidMedia=true
+" set! noscript.forbidWebGL=true
+" goodbye, ABE
+" set! noscript.ABE.enabled=false
+
+" don't prevent clickjacking on trusted sites
+" set! noscript.clearClick=1
+
+" what's in the context menu?
+" set! noscript.showAbout=false
+" set! noscript.showAddress=false
+" set! noscript.showAllowPage=true
+" set! noscript.showBaseDomain=true
+" set! noscript.showBlankSources=false
+" set! noscript.showBlockedObjects=false
+" set! noscript.showDistrust=true
+" set! noscript.showDomain=false
+" set! noscript.showExternalFilters=true
+" set! noscript.showGlobal=false
+" set! noscript.showPermanent=true
+" set! noscript.showPlaceholder=true
+" set! noscript.showRecentlyBlocked=false
+" set! noscript.showRevokeTemp=false
+" set! noscript.showTemp=true
+" set! noscript.showTempAllowPage=true
+" set! noscript.showTempToPerm=true
+" set! noscript.showUntrusted=true
+" set! noscript.showUntrustedPlaceholder=true
+
+" Ublock functionality when docked to liberator
+set! extensions.ublock0.forceLegacyToolbarButton=true
+" shut up
+" set! noscript.notify=false
+" set! noscript.notify.bottom=true
+" set! noscript.clearClick.prompt=false
+" set! noscript.sound=false
+" set! noscript.ABE.notify=false
+" set! noscript.forbidMetaRefresh.notify=false
+" set! noscript.xss.notify=false
+" ProxyFU Off/On toggling
+map <F9> :set! network.proxy.type=0<CR>
+map <F10> :set! network.proxy.type=1<CR>
+
+echo "GoGo Gadget Vimperator..."
+" vim: ft=vimperator ts=4 sw=4 sts=0 et
