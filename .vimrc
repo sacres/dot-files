@@ -125,6 +125,9 @@ autocmd FileType *vimperatorrc setlocal commentstring="\ %s
 
 " Pandoc/Markdown Madness
 let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+" Speeling
+autocmd BufRead,BufNewFile *.md setlocal spell
+set complete+=kspell
 
 " Python [TBRdone]
 
