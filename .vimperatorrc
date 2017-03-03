@@ -24,7 +24,7 @@ set! ui.key.menuAccessKeyFocuses=false
 
 " autocomplete with smart Firefox stuff and open tabs
 
-set complete=lt
+set complete=ltSs
 
 " tab operation
 noremap <C-h> gT
@@ -56,10 +56,13 @@ nnoremap <CR> :nohlsearch<CR><CR>
 
 " set defsearch=duckduckgo
 set ds=startpage
-set! defsearch=GoogleFU
+set! defsearch=ddg
 " set suggestengines=duckduckgo
 set! suggestengines=startpage
-set activate=all
+set! activate=all
+
+" Wild option
+" set wildmode=list:longest,full
 
 " hints
 set hintmatching=contains
@@ -113,7 +116,7 @@ set! network.dnsCacheExpiration = 0
 " DuckDuckGo
 set! browser.startup.homepage=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
 set! browser.search.selectedEngine=
-set! browser.search.defaultenginename=DuckDuckGo
+set! browser.search.defaultenginename=ddg
 set! keyword.URL=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
 set! browser.search.suggest.enabled=false
 set! browser.search.update=false
@@ -474,7 +477,6 @@ set! extensions.ublock0.forceLegacyToolbarButton=true
 " set! noscript.ABE.notify=false
 " set! noscript.forbidMetaRefresh.notify=false
 " set! noscript.xss.notify=false
-" ProxyFU Off/On toggling
 map <F9> :set! network.proxy.type=0<CR>
 map <F10> :set! network.proxy.type=1<CR>
 
