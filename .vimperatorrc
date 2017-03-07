@@ -37,7 +37,9 @@ noremap <C-n> :tabmove! +1<CR>
 noremap <Leader>s :noscript toggletemp<CR>
 noremap <Leader>S :noscript toggleperm<CR>
 
+" Remove all identifiers from privacy settings (w/ mapping to key)
 
+noremap <Leader>d :sanitize cache downloads cookies sessions formdata history -timespan 0<CR>
 
 
 
@@ -54,11 +56,8 @@ nnoremap <CR> :nohlsearch<CR><CR>
 
 " DuckDuckGo search
 
-" set defsearch=duckduckgo
-set ds=startpage
-set! defsearch=ddg
-" set suggestengines=duckduckgo
-set! suggestengines=startpage
+set defsearch=ddg
+set! suggestengines=ddg
 set! activate=all
 
 " Wild option
@@ -94,7 +93,7 @@ nnoremap I <S-Esc>
 
 nnoremap ~ <Nop>
 
-" ignorekeys
+" ignorekeys ; keeping unused as examples for end-users
 
 ignorekeys clear
 " ignorekeys add drive\\.google\\.com
@@ -109,7 +108,7 @@ ignorekeys add youtube\\.com
 " -----------------------------------------------------------------------
 " -                            about:config                             -
 " -----------------------------------------------------------------------
-set! network.dns.disableIPv6 = true
+set! network.dns.disableIPv6 = false
 set! network.dns.disablePrefetch = true
 set! network.dnsCacheExpiration = 0
 
@@ -418,13 +417,13 @@ set! network.dns.disablePrefetch=true
 " set! noscript.noping=true
 " set! noscript.nosniff=true
 set! plugin.state.googletalkbrowserplugin=0
-set! plugin.state.java=0
+set! plugin.state.java=1
 set! plugin.state.npgtpo3dautoplugin=0
 set! plugin.state.o1dbrowserplugin=0
 set! plugin.state.onlivegameclientdetector=0
 set! plugins.click_to_play=true
 set! reader.parse-on-load.enabled=false
-set! security.enable_java=false
+set! security.enable_java=true
 set! social.enabled=false
 set! social.remote-install.enabled=false
 set! social.sidebar.open=false
@@ -477,8 +476,18 @@ set! extensions.ublock0.forceLegacyToolbarButton=true
 " set! noscript.ABE.notify=false
 " set! noscript.forbidMetaRefresh.notify=false
 " set! noscript.xss.notify=false
+
+" -----------------------------------------------------------------------
+" -                           Proxy bindings                            -
+" -----------------------------------------------------------------------
+
 map <F9> :set! network.proxy.type=0<CR>
 map <F10> :set! network.proxy.type=1<CR>
 
+" -----------------------------------------------------------------------
+" -                      Start Message to Display                       -
+" -----------------------------------------------------------------------
+
 echo "GoGo Gadget Vimperator..."
+
 " vim: ft=vimperator ts=4 sw=4 sts=0 et
