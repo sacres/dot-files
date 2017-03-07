@@ -108,7 +108,7 @@ ignorekeys add youtube\\.com
 " -----------------------------------------------------------------------
 " -                            about:config                             -
 " -----------------------------------------------------------------------
-set! network.dns.disableIPv6 = true
+set! network.dns.disableIPv6 = false
 set! network.dns.disablePrefetch = true
 set! network.dnsCacheExpiration = 0
 
