@@ -484,6 +484,16 @@ set! extensions.ublock0.forceLegacyToolbarButton=true
 map <F9> :set! network.proxy.type=0<CR>
 map <F10> :set! network.proxy.type=1<CR>
 
+" Fix search highlighting
+" Lifted from: https://github.com/ipwnponies/dotfiles/commit/43fd08c1eb0eedfcaebbb75aa4b4dc8fe52888ae
+
+    js <<EOF
+    finder.highlight = function() {
+        this.setupFindbar();
+        this.findbar.toggleHighlight(true);
+    }
+EOF
+
 " -----------------------------------------------------------------------
 " -                      Start Message to Display                       -
 " -----------------------------------------------------------------------
