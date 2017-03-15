@@ -160,7 +160,7 @@ PATH=$PATH:/usr/bin/X11:/usr/tcb/bin
 # MacOSX entries
 PATH=/sw/bin:/sw/sbin:/Developer/Tools:$PATH
 # My entries
-PATH=$PATH:~/bin:~/bin/admin:/usr/local/bin:/usr/kerberos/sbin:/opt/google:/opt/adt-bundle-linux-x86_64/sdk/platform-tools:/opt/Adobe/Reader9/bin:/opt/TeamSpeak3-Client-linux_amd64/:/opt/vagrant:/usr/local/array_vpn:.local/bin
+PATH=$PATH:~/bin:~/bin/admin:/usr/local/bin:/usr/kerberos/sbin:/opt/google:/opt/adt-bundle-linux-x86_64/sdk/platform-tools:/opt/Adobe/Reader9/bin:/opt/TeamSpeak3-Client-linux_amd64/:/opt/vagrant:/usr/local/array_vpn
 # Android SDK & Atlassian path munge as below moved to bashrc.local (which is to be added to GH once crypto is finalized)
 # ADDED .bashrc.local to GH Feb 14, 2017 **TODO**: extricate comments like above and throughout to CHANGELOG/HISTORY files**
 #PATH=$PATH:$(find /opt/Android \( -iname 'bin' -printf ":%p" -o -iname 'adb' -printf ":%p\n" \))
@@ -581,8 +581,13 @@ export SUDO_EDITOR=vim
 # Make the last call on the local settings file {{{1
 # ** Stoked with GIT env, email, etc. and other _local_ settings **
 ######################################################################
+if [[ "$(id -u)" != 0 ]]; then
+   [ -e "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
+fi
 
-[ -e "$HOME/.bashrc.local" ] && . "$HOME"/.bashrc.local
+if [[ "$(id -u)" = 0 ]]; then
+   [ -e "$HOME/.bashrc.pathclean" ] && . "$HOME/.bashrc.pathclean"
+fi
 
 ######################################################################
 # Clean up {{{1
