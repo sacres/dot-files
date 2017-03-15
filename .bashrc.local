@@ -58,7 +58,7 @@ fi
 #######################################################################
 #                              Git Stuff                              #
 #######################################################################
-if [ -f .gitconfig ]; then
+if [ -f ~/.gitconfig ]; then
    GIT_COMMITTER_NAME="$(getent passwd "$USER" | cut -d ':' -f 5)"
    GIT_COMMITTER_EMAIL="$( git config --get user.email)"
    GIT_AUTHOR_NAME="$(getent passwd "$USER" | cut -d ':' -f 5)"
@@ -79,7 +79,7 @@ fi
 #                           Token Affection                           #
 #######################################################################
 function with_github () {
-  if [[ "$(type -p pass)" ]]; then
+  if [[ "$(type -p pass)" && "$(id -u)" != 0 ]]; then
     /usr/bin/pass github/token
   fi
 }
