@@ -49,6 +49,7 @@ Plugin 'jonathanfilip/vim-lucius'
 Plugin 'vimperator/vimperator.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'reedes/vim-lexical'
 
 call vundle#end()
 
@@ -126,6 +127,13 @@ autocmd FileType *vimperatorrc setlocal commentstring="\ %s
 " Pandoc/Markdown Madness
 let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 " Speeling
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd call lexical#init()
+  autocmd FileType textile call lexical#init()
+  autocmd FileType text call lexical#init({ 'spell': 0 })
+augroup END
+
 autocmd BufRead,BufNewFile *.md setlocal spell
 set complete+=kspell
 
