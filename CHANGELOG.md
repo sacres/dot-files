@@ -2,8 +2,29 @@
 
 ## [Unreleased](https://github.com/sacres/dot-files/tree/HEAD)
 
+**Implemented enhancements:**
+
+- Speeling chekkin tweaks for vim/markdown and a few search tweaks for vimperator - TODO: tweak spellingfile with technical defs which already exist elsewhere; add said file to this repo. [\#14](https://github.com/sacres/dot-files/pull/14) ([sacres](https://github.com/sacres))
+
+**Fixed bugs:**
+
+- Validate if acct. is root - skip .bashrc.local for root acct. - move .local/bin path from bashrc to .bashrc.local - if future calls do call .bashrc.local for root acct, don't instantiate token function [\#17](https://github.com/sacres/dot-files/pull/17) ([sacres](https://github.com/sacres))
+- Fix search highlighting \(find\) in vimperator - Lifted from: https://github.com/ipwnponies/dotfiles/commit/43fd08c1eb0eedfcaebbb75aa4b4dc8fe52888ae, via issue: https://github.com/vimperator/vimperator-labs/issues/676 [\#16](https://github.com/sacres/dot-files/pull/16) ([sacres](https://github.com/sacres))
+- Clean up Token handling: bashrc.local - Add ListToggle \(Syntastic checks suck up hella term real-estate\) to vimrc [\#13](https://github.com/sacres/dot-files/pull/13) ([sacres](https://github.com/sacres))
+
+**Closed issues:**
+
+- Label Testing [\#12](https://github.com/sacres/dot-files/issues/12)
+
 **Merged pull requests:**
 
+- Add sanitization - Cleans cookies and other personal bits - Mapped to key for quick access - Re-enable IPv6 - Enable java [\#15](https://github.com/sacres/dot-files/pull/15) ([sacres](https://github.com/sacres))
+- Add travis shellcheck testing - clean up: syntax/style [\#11](https://github.com/sacres/dot-files/pull/11) ([sacres](https://github.com/sacres))
+- Refactor path cleaning - re-indenting & quoting [\#10](https://github.com/sacres/dot-files/pull/10) ([sacres](https://github.com/sacres))
+- Add sane touchpad tweaks that keep \*me\* sane - small lic. format of README [\#9](https://github.com/sacres/dot-files/pull/9) ([sacres](https://github.com/sacres))
+- Random palm scrolls/sketchiness w/ touchpad = Mouse Trap, vimrc [\#8](https://github.com/sacres/dot-files/pull/8) ([sacres](https://github.com/sacres))
+- FIX: PS1 prompt doesn't render pyenv properly on terminal initialization [\#7](https://github.com/sacres/dot-files/pull/7) ([sacres](https://github.com/sacres))
+- Feature: Add Changelog \(and step into github\_changelog\_generator\) [\#6](https://github.com/sacres/dot-files/pull/6) ([sacres](https://github.com/sacres))
 - Packer conditional alias and date alias comment [\#5](https://github.com/sacres/dot-files/pull/5) ([sacres](https://github.com/sacres))
 - Squelch unwanted 'type' output: - \*\* fixes rsync breakage - break pow… [\#4](https://github.com/sacres/dot-files/pull/4) ([sacres](https://github.com/sacres))
 - Extricate more foo to .bashrc.local [\#3](https://github.com/sacres/dot-files/pull/3) ([sacres](https://github.com/sacres))
