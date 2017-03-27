@@ -4,6 +4,7 @@
 
 **Implemented enhancements:**
 
+- Add Custom UserAgent [\#19](https://github.com/sacres/dot-files/pull/19) ([sacres](https://github.com/sacres))
 - Speeling chekkin tweaks for vim/markdown and a few search tweaks for vimperator - TODO: tweak spellingfile with technical defs which already exist elsewhere; add said file to this repo. [\#14](https://github.com/sacres/dot-files/pull/14) ([sacres](https://github.com/sacres))
 
 **Fixed bugs:**
