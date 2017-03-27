@@ -93,6 +93,9 @@ nnoremap I <S-Esc>
 
 nnoremap ~ <Nop>
 
+" Set Custom UserAgent
+set! general.useragent.override="Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0"
+
 " ignorekeys ; keeping unused as examples for end-users
 
 ignorekeys clear
