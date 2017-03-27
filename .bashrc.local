@@ -135,7 +135,9 @@ if [ -d ~/.pyenv ]; then
   PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV=true
   # Python Encoding
   PYTHONIOENCODING=utf_8
-  export PYENV_ROOT PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV PYTHONIOENCODING
+  PYTHON_CONFIGURE_OPTS="--enable-shared"
+  export PYENV_ROOT PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV PYTHONIOENCODING\
+    PYTHON_CONFIGURE_OPTS
 fi
 
 #######################################################################
