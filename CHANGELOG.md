@@ -19,6 +19,7 @@
 
 **Merged pull requests:**
 
+- Enabling 'shared' for pyenv [\#21](https://github.com/sacres/dot-files/pull/21) ([sacres](https://github.com/sacres))
 - Add sanitization - Cleans cookies and other personal bits - Mapped to key for quick access - Re-enable IPv6 - Enable java [\#15](https://github.com/sacres/dot-files/pull/15) ([sacres](https://github.com/sacres))
 - Add travis shellcheck testing - clean up: syntax/style [\#11](https://github.com/sacres/dot-files/pull/11) ([sacres](https://github.com/sacres))
 - Refactor path cleaning - re-indenting & quoting [\#10](https://github.com/sacres/dot-files/pull/10) ([sacres](https://github.com/sacres))
