@@ -116,10 +116,11 @@ set! network.dns.disablePrefetch = true
 set! network.dnsCacheExpiration = 0
 
 " DuckDuckGo
-set! browser.startup.homepage=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
+set! browser.startup.homepage=https://beta.duckduckgo.com/?k1=-1&kk=-1&kam=osm&kak=-1&kao=-1&kac=-1
 set! browser.search.selectedEngine=
 set! browser.search.defaultenginename=ddg
-set! keyword.URL=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
+" set! keyword.URL=https://duckduckgo.com/?kae=b&kc=-1&ks=n&k1=-1&kg=p&kl=us-en&kz=-1&ku=1&kp=-1&k5=1&kam=osm&kac=-1&kao=-1&kd=1&kak=-1&kad=en_US
+set! keyword.URL=https://beta.duckduckgo.com/?k1=-1&kk=-1&kam=osm&kak=-1&kao=-1&kac=-1
 set! browser.search.suggest.enabled=false
 set! browser.search.update=false
 
@@ -162,11 +163,11 @@ set! browser.tabs.insertRelatedAfterCurrent.override=true
 set! browser.tabs.closeWindowWithLastTab=false
 
 " what to clear after shutdown?
-set! privacy.clearOnShutdown.cache=false
+set! privacy.clearOnShutdown.cache=true
 set! privacy.clearOnShutdown.cookies=true
 set! privacy.clearOnShutdown.downloads=true
 set! privacy.clearOnShutdown.formdata=true
-set! privacy.clearOnShutdown.history=false
+set! privacy.clearOnShutdown.history=true
 set! privacy.clearOnShutdown.offlineApps=true
 set! privacy.clearOnShutdown.passwords=true
 set! privacy.clearOnShutdown.sessions=true
@@ -185,7 +186,7 @@ set! privacy.donottrackheader.value=1
 set! privacy.trackingprotection.enabled=true
 
 " private browsing settings
-set! browser.privatebrowsing.autostart=false
+set! browser.privatebrowsing.autostart=true
 set! browser.privatebrowsing.dont_prompt_on_enter=true
 
 " don't check if we're the default browser
@@ -485,8 +486,7 @@ set! extensions.ublock0.forceLegacyToolbarButton=true
 " -----------------------------------------------------------------------
 
 set! media.autoplay.enabled=false
-" WebRTC Blocking
-set! media.peerconnection.enabled=false
+
 " -----------------------------------------------------------------------
 " -                           Proxy bindings                            -
 " -----------------------------------------------------------------------
