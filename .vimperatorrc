@@ -485,7 +485,8 @@ set! extensions.ublock0.forceLegacyToolbarButton=true
 " -----------------------------------------------------------------------
 
 set! media.autoplay.enabled=false
-
+" WebRTC Blocking
+set! media.peerconnection.enabled=false
 " -----------------------------------------------------------------------
 " -                           Proxy bindings                            -
 " -----------------------------------------------------------------------
