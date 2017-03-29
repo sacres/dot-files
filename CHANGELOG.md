@@ -1,9 +1,9 @@
 # Change Log
 
-## [Unreleased](https://github.com/sacres/dot-files/tree/HEAD)
-
+## [0.9.0](https://github.com/sacres/dot-files/tree/0.9.0) (2017-03-28)
 **Implemented enhancements:**
 
+- Privacy enhancements [\#22](https://github.com/sacres/dot-files/pull/22) ([sacres](https://github.com/sacres))
 - Add Custom UserAgent [\#19](https://github.com/sacres/dot-files/pull/19) ([sacres](https://github.com/sacres))
 - Speeling chekkin tweaks for vim/markdown and a few search tweaks for vimperator - TODO: tweak spellingfile with technical defs which already exist elsewhere; add said file to this repo. [\#14](https://github.com/sacres/dot-files/pull/14) ([sacres](https://github.com/sacres))
 
