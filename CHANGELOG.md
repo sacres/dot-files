@@ -1,8 +1,9 @@
 # Change Log
 
-## [0.9.0](https://github.com/sacres/dot-files/tree/0.9.0) (2017-03-31)
+## [0.9.0](https://github.com/sacres/dot-files/tree/0.9.0) (2017-04-02)
 **Implemented enhancements:**
 
+- Add proxy functions utilizing \(private bashrc file\) [\#24](https://github.com/sacres/dot-files/pull/24) ([sacres](https://github.com/sacres))
 - Firefox Enhanced Privacy Settings [\#23](https://github.com/sacres/dot-files/pull/23) ([sacres](https://github.com/sacres))
 - Privacy enhancements [\#22](https://github.com/sacres/dot-files/pull/22) ([sacres](https://github.com/sacres))
 - Add Custom UserAgent [\#19](https://github.com/sacres/dot-files/pull/19) ([sacres](https://github.com/sacres))
