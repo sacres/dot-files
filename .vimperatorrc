@@ -33,8 +33,10 @@ noremap <C-n> :tabmove! +1<CR>
 " noscript.js
 noremap <Leader>s :noscript toggletemp<CR>
 noremap <Leader>S :noscript toggleperm<CR>
+noremap <Leader>r :noscript togglerevokeall<CR>
 
 " Remove all identifiers from privacy settings (w/ mapping to key)
+
 noremap <Leader>d :sanitize cache downloads cookies sessions formdata history -timespan 0<CR>
 
 
@@ -88,7 +90,7 @@ ignorekeys clear
 " ignorekeys add drive\\.google\\.com
 " ignorekeys add -except=t,T,o,O,:,g,q inbox\\.google\\.com
 " ignorekeys add -except=t,T,o,O,:,q mail\\.google\\.com
-" ignorekeys add -except=: rememberthemilk\\.com
+ignorekeys add -except=: rememberthemilk\\.com
 " ignorekeys add youtube\\.com
 
 " Firefox
@@ -96,13 +98,13 @@ ignorekeys clear
 " -----------------------------------------------------------------------
 " -                            about:config                             -
 " -----------------------------------------------------------------------
-set! network.dns.disableIPv6 = false
-set! network.dns.disablePrefetch = true
-set! network.dnsCacheExpiration = 0
+set! network.dns.disableIPv6=false
+set! network.dns.disablePrefetch=true
+set! network.dnsCacheExpiration=0
 
 " DuckDuckGo
 set! browser.startup.homepage=liberator://help/intro
-set! keyword.URL=https://duckduckgo.com/?kc=-1&km=m&k1=-1&kg=p&kz=-1&kaa=f1a87b&ku=1&kp=-1&k9=88a3eb&k5=1&kam=osm&kac=-1&kah=wt-wt&kao=-1&kak=-1&kad=en_US
+set! keyword.URL=https://duckduckgo.com/?&kc=-1&km=m&k1=-1&kg=p&t=debian&kz=-1&kaa=f1a87b&ku=1&kp=-1&k9=88a3eb&k5=1&kam=osm&kac=-1&kah=wt-wt&kao=-1&kak=-1&kad=en_US
 set! browser.search.suggest.enabled=false
 set! browser.search.update=false
 
@@ -462,7 +464,7 @@ map <F10> :set! network.proxy.type=1<CR>
 " Fix search highlighting
 " Lifted from: https://github.com/ipwnponies/dotfiles/commit/43fd08c1eb0eedfcaebbb75aa4b4dc8fe52888ae
 
-    js <<EOF
+js <<EOF
     finder.highlight = function() {
         this.setupFindbar();
         this.findbar.toggleHighlight(true);
@@ -472,6 +474,6 @@ EOF
 " -----------------------------------------------------------------------
 " -                      Start Message to Display                       -
 " -----------------------------------------------------------------------
-echo "GoGo Gadget Vimperator..."
+echo "GoGo Gadget..."
 
 " vim: ft=vimperator ts=4 sw=4 sts=0 et
