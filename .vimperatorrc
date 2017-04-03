@@ -3,9 +3,7 @@
 " ----------
 
 " ui
-
 colorscheme default
-
 set toolbars=nonavigation,tabs,addons
 set maxitems=10
 set status=input,ssl,location,bookmark
@@ -37,13 +35,11 @@ noremap <Leader>s :noscript toggletemp<CR>
 noremap <Leader>S :noscript toggleperm<CR>
 
 " Remove all identifiers from privacy settings (w/ mapping to key)
-
 noremap <Leader>d :sanitize cache downloads cookies sessions formdata history -timespan 0<CR>
 
 
 
 " keep messages around for 2 seconds
-
 set messagetimeout=2000
 
 " Better searching
@@ -54,7 +50,6 @@ set smartcase
 nnoremap <CR> :nohlsearch<CR><CR>
 
 " DuckDuckGo search
-
 set defsearch=ddg
 set! suggestengines=ddg
 set! activate=all
@@ -66,47 +61,38 @@ set! activate=all
 set hintmatching=contains
 set followhints=1
 set hintinputs=''
-
 " set hintchars=fdasjkl;rcexunim
 
 " focus the content
-
 " set focuscontent
 
 " vimperator commands open in new tabs
-
 set newtab=all
 
 " remappings
-
 nnoremap j 3j
 nnoremap k 3k
 nnoremap h 3h
 nnoremap l 3l
-
 nnoremap J gt
 nnoremap K gT
 nnoremap x :tabclose<cr>
-
 nnoremap I <S-Esc>
-
 nnoremap ~ <Nop>
 
 " Set Custom UserAgent
 set! general.useragent.override="Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0"
 
 " ignorekeys ; keeping unused as examples for end-users
-
 ignorekeys clear
 " ignorekeys add drive\\.google\\.com
 " ignorekeys add -except=t,T,o,O,:,g,q inbox\\.google\\.com
 " ignorekeys add -except=t,T,o,O,:,q mail\\.google\\.com
-ignorekeys add -except=: rememberthemilk\\.com
+" ignorekeys add -except=: rememberthemilk\\.com
 " ignorekeys add youtube\\.com
 
 " Firefox
 " -------
-
 " -----------------------------------------------------------------------
 " -                            about:config                             -
 " -----------------------------------------------------------------------
@@ -381,7 +367,6 @@ set! extensions.isreaditlater.autoCloseTab=false
 
 " NoScript and forbidden things
 " -----------------------------
-
 " what is forbidden?
 set! browser.formfill.enable=false
 set! browser.frames.enabled=false
@@ -423,6 +408,7 @@ set! toolkit.telemetry.enabled=false
 " set! noscript.forbidFonts=true
 " set! noscipt.forbidMedia=true
 " set! noscript.forbidWebGL=true
+
 " goodbye, ABE
 " set! noscript.ABE.enabled=false
 
@@ -452,6 +438,7 @@ set! toolkit.telemetry.enabled=false
 
 " Ublock functionality when docked to liberator
 set! extensions.ublock0.forceLegacyToolbarButton=true
+
 " shut up
 " set! noscript.notify=false
 " set! noscript.notify.bottom=true
@@ -464,13 +451,11 @@ set! extensions.ublock0.forceLegacyToolbarButton=true
 " -----------------------------------------------------------------------
 " -                       Disable Media AutoPlay                        -
 " -----------------------------------------------------------------------
-
 set! media.autoplay.enabled=false
 
 " -----------------------------------------------------------------------
 " -                           Proxy bindings                            -
 " -----------------------------------------------------------------------
-
 map <F9> :set! network.proxy.type=0<CR>
 map <F10> :set! network.proxy.type=1<CR>
 
@@ -487,7 +472,6 @@ EOF
 " -----------------------------------------------------------------------
 " -                      Start Message to Display                       -
 " -----------------------------------------------------------------------
-
 echo "GoGo Gadget Vimperator..."
 
 " vim: ft=vimperator ts=4 sw=4 sts=0 et
