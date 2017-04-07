@@ -68,10 +68,10 @@ if [ -f ~/.gitconfig ]; then
    export GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GITHUB_USER
 fi
 
-if [[ "$(type -p hub)" ]]; then
+if [[ "$(type -p hub)" ]] && [[ -f "$HOME"/creds/hub.gpg ]]; then
   . "$HOME/bin/hub.bash_completion.sh"
   # eval "$(hub alias -s)"
-  if [ ! -f "$HOME"/.config/hub ]; then
+  if [[ ! -f "$HOME"/.config/hub || -f "$HOME"/creds/hub.gpg ]]; then
     gpg2 --quiet --batch --use-agent --decrypt "$HOME"/creds/hub.gpg > "$HOME"/.config/hub
   fi
 fi
