@@ -249,7 +249,7 @@ unset PROG OPTPROGS LOCALPROGS
 # TODO: I think there's a tset in /usr/ucb
 if [[ "$_shell_is_interactive" == 1 && $OSTYPE != solaris* ]]; then
     if [[ $(type -p tset) ]]; then
-        eval "$(SHELL=/bin/sh tset -r -s)"
+        eval "$(SHELL=/bin/sh tset -s)"
     fi
 fi
 
