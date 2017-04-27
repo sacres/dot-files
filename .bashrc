@@ -249,7 +249,7 @@ unset PROG OPTPROGS LOCALPROGS
 # TODO: I think there's a tset in /usr/ucb
 if [[ "$_shell_is_interactive" == 1 && $OSTYPE != solaris* ]]; then
     if [[ $(type -p tset) ]]; then
-        eval "$(SHELL=/bin/sh tset -r -s)"
+        eval "$(SHELL=/bin/sh tset -s)"
     fi
 fi
 
@@ -313,6 +313,7 @@ export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
+shopt -s histverify                      # enable history verification so that commands that are matched by the !, !!, and !? designators are not blindly executed [https://superuser.com/questions/7414/how-can-i-search-the-bash-history-and-rerun-a-command#74160]
 
 ######################################################################
 # Prompt and other terminal settings {{{1
@@ -581,11 +582,13 @@ export SUDO_EDITOR=vim
 # Make the last call on the local settings file {{{1
 # ** Stoked with GIT env, email, etc. and other _local_ settings **
 ######################################################################
-if [[ "$(id -u)" != 0 ]]; then
+if [[ "$(id -u)" -ne 0 && -e "$HOME/.bashrc.local" ]]; then
    [ -e "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
+else
+   [ -e "$HOME/.bashrc.pathclean" ] && . "$HOME/.bashrc.pathclean"
 fi
 
-if [[ "$(id -u)" = 0 ]]; then
+if [[ "$(id -u)" -eq 0 ]]; then
    [ -e "$HOME/.bashrc.pathclean" ] && . "$HOME/.bashrc.pathclean"
 fi
 
