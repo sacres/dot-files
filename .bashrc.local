@@ -79,17 +79,25 @@ fi
 #######################################################################
 #                           Token Affection                           #
 #######################################################################
-function with_github () {
-  if [[ "$(type -p pass)" && "$(id -u)" != 0 ]]; then
-    /usr/bin/pass github/token
-  fi
+if [[ "$(type -p pass)" && "$(id -u)" -ne 0 ]]; then
+  function with_github () {
+      /usr/bin/pass github/token
 }
+
+  function with_cf () {
+    /usr/bin/pass cloudflare/token
+}
+
+fi
 
 if [[ "$(with_github)" ]]; then
   GITHUB_TOKEN=$(with_github)
   GITHUB_ACCESS_TOKEN=$(with_github)
   CHANGELOG_GITHUB_TOKEN=$(with_github)
-  export GITHUB_TOKEN GITHUB_ACCESS_TOKEN CHANGELOG_GITHUB_TOKEN
+  if [[ "$(with_cf)" ]]; then
+    CF_TOKEN=$(with_cf)
+  export GITHUB_TOKEN GITHUB_ACCESS_TOKEN CHANGELOG_GITHUB_TOKEN CF_TOKEN
+  fi
 fi
 #######################################################################
 #                              Node o_0                               #
@@ -141,8 +149,20 @@ if [ -d ~/.pyenv ]; then
 fi
 
 #######################################################################
+#                            Default Route                            #
+#######################################################################
+function def_route () {
+    ip r | awk '/default/ {print $3}'
+}
+
+DEF_ROUTE=$(def_route)
+export DEF_ROUTE
+
+#######################################################################
 #                                Proxy                                #
 #######################################################################
+# The encrypted file ref'd contains the variable sourced from this function
+
 function proxy_on () {
     . <(gpg -qd "$HOME"/.bashrc.private.gpg)
     export ALL_PROXY
